@@ -1,0 +1,34 @@
+// this is que two og high paying employee
+class Solution {
+    public List<String> findHighAccessEmployees(List<List<String>> access_times) {
+         HashMap<String,ArrayList<Integer>>map=new HashMap<>();
+        for(List<String>list:access_times){
+             String name=list.get(0);                   //get name
+             int time=Integer.parseInt(list.get(1));    //convert string time to int
+              //store them in the Hashmap
+             if(!map.containsKey(name)){
+                 map.put(name,new ArrayList<>());
+                 map.get(name).add(time);
+             }else{
+                 map.get(name).add(time);
+             }
+        }
+        List<String>high=new ArrayList<>();
+        //traverse the map
+        for(String name:map.keySet()){
+            ArrayList<Integer>list=map.get(name);
+            Collections.sort(list);
+            //we are checking because we want 3 Consecutive times for name to be highAccess
+            if(list.size()>=3){
+               for(int i=0;i<list.size()-2;i++){
+                   if(list.get(i+2)-list.get(i)<100){
+                       high.add(name); //if we gtt the name no need to check further break it
+                       break;
+                   }
+               }
+            }
+        }
+        return high;
+        
+    }
+}
