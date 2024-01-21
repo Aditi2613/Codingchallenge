@@ -1,0 +1,32 @@
+//kth smallest query,we ahve given num and queries eg ;num=(102,145,345) and queries like ([1,1],[2,1]) so the second value in queries are trimmed one and first one is kth smallest query so we have to first give index to corresponding num and then check for trim value , acc to trim value sort the num again and then check for value in box of kth element and then write the ans -index do forr all no and print their index we can do this using mapping map trim values to no and their index then we have sort using recurssion and print the ans 
+class Solution {
+   class Node {
+    int ind;
+    String s;
+    Node(String s, int i) {
+        this.s = s;
+        this.ind = i;
+    }
+}
+public int[] smallestTrimmedNumbers(String[] nums, int[][] q) {
+    int res[] = new int[q.length];
+    int itr = 0;
+    int n = nums[0].length();
+    for(int i = 0 ;i<q.length;i++) {
+        ArrayList<Node> al = new ArrayList<>();
+        int temp = q[i][1];
+        for(int j =0;j<nums.length;j++) {
+            al.add(new Node(nums[j].substring(n - temp), j));
+        }
+		
+        Collections.sort(al, new Comparator<Node>(){
+            public int compare(Node a, Node b) {
+                return (a.s).compareTo(b.s);
+            }
+        }); 
+		
+        res[itr++] = al.get(q[i][0]-1).ind; 
+    }
+    return res;
+}
+}
