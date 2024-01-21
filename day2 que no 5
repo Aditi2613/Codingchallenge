@@ -1,0 +1,32 @@
+//flip the matrix , here we have given m*n matrix initially all having value 0 then we have to randomly flip the value of zero from any index to 1 and exclude the index , then flip the remaining values as per given in the que for ex if it is given null,flip,flip,reset flip , here are first two flip any 4 equally likeley then reset all index to 0 then again all have equal chance 
+class Solution {
+
+   private int m;
+    private int n;
+    private HashSet<String> mat;
+
+    public Solution(int m, int n) {
+        mat = new HashSet<>();
+        this.m = m;
+        this.n = n;
+    }
+    
+    public int[] flip() {
+        int r = (int) (Math.random() * m);
+        int c = (int) (Math.random() * n);
+        
+        while(mat.contains(r + " " + c)){
+            r = (int) (Math.random() * m);
+            c = (int) (Math.random() * n);
+        }
+            
+        int output[] = {r, c};
+        mat.add(r + " " + c);
+                               
+        return output;
+    }
+    
+    public void reset() {
+        mat.clear();
+    }
+}
