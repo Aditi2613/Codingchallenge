@@ -1,0 +1,38 @@
+// number pattern of inc i , dec d
+class Solution{
+    static String printMinNumberForPattern(String s){
+        // code here
+         int ans[]=new int[s.length()+1];
+        print(s,ans);
+        String t="";
+        for(int i=0;i<ans.length;i++)
+         t+=ans[i];
+        return t;
+    }
+     public static int[] print(String str,int ans[])
+    {
+       
+        Stack<Integer> s=new Stack<>();
+        int c=1;
+                for(int i=0;i<=str.length();i++)
+                 {
+                     if(i==str.length() ||str.charAt(i)=='I')
+                     {
+                         ans[i]=c;
+                         c++;
+                         while(!s.isEmpty())
+                         {
+                             ans[s.pop()]=c;
+                             c++;
+                         }
+                     }
+                     else
+                     {
+                         s.push(i);
+                     }
+
+                }
+                return ans;
+                
+    }
+}
